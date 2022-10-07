@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3d54f5c2a106347adbf83bd2b57131, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  TypeWeapon: 1
+  DamageAmt: 5
+  LauncherMesh: {fileID: 0}
+  ParticleToEmit: {fileID: 6413278326328055114, guid: d24d80c63d3e8774d9a0a3eac8526caf,
+    type: 3}
+  WeaponName: Pistol
+  Icon: {fileID: 0}
+  Distance: 1000
+  ProjectilePrefab: {fileID: 0}
+  NoOfDrops: 0
+  DropPrefab: {fileID: 0}
