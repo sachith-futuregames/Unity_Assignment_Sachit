@@ -39,7 +39,7 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
     [SerializeField]  ActiveCameraManager CameraManager;
 
     //Health System
-    private float _health = 10;
+    public float Health = 10;
 
 
     //WeaponSystem
@@ -155,9 +155,9 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
 
     public void TakeDamage(int InDamage)
     {
-        Debug.Log("Hit: Health: " + _health);
-        _health -= InDamage;
-        if(_health < 0)
+        Health -= InDamage;
+        Debug.Log("Hit: Health: " + Health);
+        if(Health <= 0)
         {
             DeathState();
         }
@@ -165,7 +165,7 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
 
     public void GetHealth(int InHealth)
     {
-        _health += InHealth;
+        Health += InHealth;
     }
 
     public void DeathState()
@@ -173,6 +173,7 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
         bIsAlive = false;
         _playerMesh.mesh = _deathMesh;
         _playerMeshRenderer.material = _deathMaterial;
+        GetComponent<CharacterController>().height = 0.01f;
         _weaponsManager.DeathState();
     }
 

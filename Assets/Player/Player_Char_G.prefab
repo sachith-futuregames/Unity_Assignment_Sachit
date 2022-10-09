@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 4111154716563241440}
   - component: {fileID: 4111154716563241443}
   - component: {fileID: 1134151324843877709}
+  - component: {fileID: 412892414053398383}
   m_Layer: 0
   m_Name: Player_Char_G
   m_TagString: Untagged
@@ -294,6 +295,7 @@ MonoBehaviour:
   TPPCam: {fileID: 0}
   FPPCam: {fileID: 0}
   CameraManager: {fileID: 0}
+  Health: 100
   _weaponsManager: {fileID: 1134151324843877709}
   TeamID: 0
 --- !u!114 &4111154716563241443
@@ -356,6 +358,19 @@ MonoBehaviour:
   _meleeTrigger: {fileID: 5762835072358271541}
   _pc: {fileID: 4111154716563241440}
   TeamID: 0
+--- !u!65 &412892414053398383
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111154716563241445}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4860340643785103310
 GameObject:
   m_ObjectHideFlags: 0

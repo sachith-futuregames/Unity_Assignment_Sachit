@@ -79,10 +79,12 @@ public class GlobalGameManager : MonoBehaviour
 
     //SubManagers
     public ActiveCameraManager cameraManager;
+    public ScoreManager scoreManager;
 
 
     public void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         PopulateGame();
         NextPlayer();
         SetActiveStatus(true);
@@ -101,7 +103,9 @@ public class GlobalGameManager : MonoBehaviour
     {
         CurrentLevelData.PopulateTeams();
         GameObject PlayerLayer = GameObject.Find("Players");
-        for(int i = 0; i < CurrentLevelData.TeamCount; ++i)
+        scoreManager.TeamCount = CurrentLevelData.TeamCount;
+        scoreManager.TeamScores = new int[CurrentLevelData.TeamCount];
+        for (int i = 0; i < CurrentLevelData.TeamCount; ++i)
         {
             for(int j = 0; j < CurrentLevelData.PlayerCount; ++j)
             {
@@ -114,7 +118,10 @@ public class GlobalGameManager : MonoBehaviour
                 
                 
             }
+            scoreManager.TeamScores[i] = CurrentLevelData.PlayerCount * 100;
         }
+        
+        scoreManager.SetScoreBox();
     }
 
     public void SetActiveStatus(bool InStatus)
@@ -179,16 +186,20 @@ public class GlobalGameManager : MonoBehaviour
 
     public bool CheckPlayers(int TeamIndex)
     {
+        int TotalHealth = 0;
         bool CheckFlag = false;
         foreach(var Player in CurrentLevelData.Teams[TeamIndex].Players)
         {
             if (Player.bIsAlive)
             {
+                TotalHealth += (int)Player.Health;
                 CheckFlag = true;
                 break;
             }
         }
         CurrentLevelData.Teams[TeamIndex].bHasPlayers = CheckFlag;
+        scoreManager.TeamScores[TeamIndex] = TotalHealth;
+        scoreManager.UpdateScores();
         return CheckFlag;
     }
 
@@ -212,6 +223,7 @@ public class GlobalGameManager : MonoBehaviour
 
             }
         }
+        Cursor.lockState = CursorLockMode.None;
     }
 
 

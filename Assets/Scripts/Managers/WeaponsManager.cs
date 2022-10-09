@@ -63,16 +63,23 @@ public class WeaponsManager : MonoBehaviour
 
     public void Shoot()
     {
-        if(_currentWeapon.TypeWeapon == EWeaponType.Melee)
+        switch(_currentWeapon.TypeWeapon)
         {
-            StartMeleeAttack();
-        }
-        else if(_currentWeapon.TypeWeapon == EWeaponType.RayCast)
-        {
-            StartRaycastAttack();
+            case EWeaponType.Melee:
+                StartMeleeAttack();
+                break;
+            case EWeaponType.RayCast:
+                StartRaycastAttack();
+                break;
+            case EWeaponType.Projectile:
+                StartProjectileAttack();
+                break;
+            case EWeaponType.AirDrop:
+                break;
         }
     }
 
+    //Melee Attack
     private void StartMeleeAttack()
     {
         _weaponParticle = Instantiate(_currentWeapon.ParticleToEmit);
@@ -96,24 +103,22 @@ public class WeaponsManager : MonoBehaviour
         OnAttackComplete();
     }
 
+    //RayCast Attack 
     private void StartRaycastAttack()
     {
         bool bDidHit = Physics.Raycast(_pc.FPPCameraTarget.transform.position, Camera.main.transform.forward, out RayWeapon, _currentWeapon.Distance);
-        Debug.Log(bDidHit);
         if (RayWeapon.collider && bDidHit)
         {
-            Debug.Log(RayWeapon.collider.GetType());
-            Player_Controller HitEnemy = RayWeapon.collider.gameObject.gameObject.GetComponent<Player_Controller>();
-            if (HitEnemy && HitEnemy.TeamID != TeamID)
-            {
-                HitEnemy.TakeDamage(_currentWeapon.DamageAmt);
-                _weaponParticle = _currentWeapon.ParticleToEmit;
-                _weaponParticle.transform.position = _pc.FPPCameraTarget.transform.position;
-                bIsRayCasting = true;
-            }
+           
+            _weaponParticle = Instantiate(_currentWeapon.ParticleToEmit);
+            _weaponParticle.transform.parent = null;
+            _weaponParticle.transform.position = _pc.FPPCameraTarget.transform.position;
+            bIsRayCasting = true;
         }
-
-        
+        else
+        {
+            OnAttackComplete();
+        }
         
     }
     
@@ -121,17 +126,46 @@ public class WeaponsManager : MonoBehaviour
     {
         if(_currentWeapon.TypeWeapon == EWeaponType.RayCast && bIsRayCasting)
         {
-            _weaponParticle.transform.position = Vector3.Lerp(_weaponParticle.transform.position, RayWeapon.point, Time.deltaTime);
+            _weaponParticle.transform.position = Vector3.Lerp(_weaponParticle.transform.position, RayWeapon.point, Time.deltaTime * 4);
             if((RayWeapon.point - _weaponParticle.transform.position).sqrMagnitude < 1.0f)
             {
-
+                StopRaycastAttack();
             }
         }
     }
 
     private void StopRaycastAttack()
     {
+        Player_Controller HitEnemy = RayWeapon.collider.gameObject.gameObject.GetComponent<Player_Controller>();
+        if(HitEnemy && HitEnemy.TeamID != TeamID)
+        {
+            HitEnemy.TakeDamage(_currentWeapon.DamageAmt);
+        }
         bIsRayCasting = false;
+        Destroy(_weaponParticle);
+        _weaponParticle = null;
+        OnAttackComplete();
+    }
+
+    //Projectile Attack
+    private void StartProjectileAttack()
+    {
+        GameObject Projectile = Instantiate(_currentWeapon.ProjectilePrefab);
+        Projectile.GetComponent<ProjectileBehaviour>().SetupProjectile(TeamID, _currentWeapon.DamageAmt, _currentWeapon.LifeTime);
+        Projectile.GetComponent<ProjectileBehaviour>().OnExplode = Explosion;
+        Projectile.transform.position = _pc.FPPCameraTarget.transform.position + (Camera.main.transform.forward * 10);
+        Projectile.GetComponent<ProjectileBehaviour>().Shoot(Camera.main.transform.forward * 20);
+    }
+
+    public void Explosion(Vector3 InPosition)
+    {
+        _weaponParticle = Instantiate(_currentWeapon.ParticleToEmit);
+        _weaponParticle.transform.position = InPosition;
+        Invoke("StopProjectileAttack", 1.0f);
+    }
+
+    private void StopProjectileAttack()
+    {
         Destroy(_weaponParticle);
         _weaponParticle = null;
         OnAttackComplete();

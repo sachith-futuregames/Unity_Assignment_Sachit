@@ -28,6 +28,7 @@ public class WeaponsData : ScriptableObject
 
     [Header("Projectile Data")]
     public GameObject ProjectilePrefab;
+    public float LifeTime;
 
     [Header("AirDrop Data")]
     public int NoOfDrops;

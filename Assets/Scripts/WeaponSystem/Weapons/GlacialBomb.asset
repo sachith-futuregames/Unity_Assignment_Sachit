@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a3d54f5c2a106347adbf83bd2b57131, type: 3}
-  m_Name: Grenade
+  m_Name: GlacialBomb
   m_EditorClassIdentifier: 
   TypeWeapon: 2
-  DamageAmt: 0
+  DamageAmt: 11
   LauncherMesh: {fileID: 0}
-  ParticleToEmit: {fileID: 0}
+  ParticleToEmit: {fileID: 7780443733252805933, guid: b6ecd27684586954e89af519161a6817,
+    type: 3}
   WeaponName: 
   Icon: {fileID: 0}
   Distance: 0
-  ProjectilePrefab: {fileID: 0}
+  ProjectilePrefab: {fileID: 2763086603393458263, guid: 0a12b664638867542b32145d4f61844b,
+    type: 3}
+  LifeTime: 3
   NoOfDrops: 0
   DropPrefab: {fileID: 0}
