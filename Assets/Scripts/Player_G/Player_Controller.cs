@@ -22,7 +22,7 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
     public Player_Input_G playerInputActions;
     
     //Variables For Movement
-    private readonly float _gravity = -0.6f;
+    private readonly float _gravity = -0.4f;
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _velocityOnY = Vector3.zero;
     public float Speed = 10.0f;
@@ -59,6 +59,10 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
         playerInputActions.Player_G.Jump.started += Jump;
         playerInputActions.Player_G.Zoom.started += ToggleZoomBind;
         playerInputActions.Player_G.Shoot.started += Shoot;
+        playerInputActions.Player_G.Weapon1.started += ChoooseW1;
+        playerInputActions.Player_G.Weapon2.started += ChoooseW2;
+        playerInputActions.Player_G.Weapon3.started += ChoooseW3;
+        playerInputActions.Player_G.Weapon4.started += ChoooseW4;
         
         TPPCam = GameObject.Find("TPPCamera").GetComponent<CinemachineVirtualCamera>();
         FPPCam = GameObject.Find("FPPCamera").GetComponent<CinemachineVirtualCamera>();
@@ -85,20 +89,18 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
     {
         if(!_bIsGrounded)
         {
-            if(_bIsJumping)
-            {
-                _bIsJumping = false;
-            }
             _velocityOnY.y += _gravity;
-            characterController.Move(_velocityOnY * Time.deltaTime);
+            _velocityOnY = new Vector3(0f, Mathf.Clamp(_velocityOnY.y, -100f, 0f), 0f);
         }
         if(_bIsJumping)
         {
+            _bIsJumping = false;
             _bIsGrounded = false;
             _velocityOnY.y = 0;
-            _velocityOnY.y += 40.0f;
-            characterController.Move(_velocityOnY * Time.deltaTime);
+            _velocityOnY.y += 400.0f;
+            
         }
+        characterController.Move(_velocityOnY * Time.deltaTime);
     }
     //Get the movement Directions from the Input bindings
     public void GetMoveDirection()
@@ -133,6 +135,8 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
             
         }
     }
+
+    
 
     public void RotateCam()
     {
@@ -238,5 +242,34 @@ public class Player_Controller : MonoBehaviour, IHealthSystem
     private void EndTurn()
     {
         ToggleZoom();
+    }
+
+    public void ChoooseW1(InputAction.CallbackContext inputContext)
+    {
+        if(inputContext.started && bIsActive)
+        {
+            _weaponsManager.SetCurrentWeapon(_weaponsManager.Inventory[0]);
+        }
+    }
+    public void ChoooseW2(InputAction.CallbackContext inputContext)
+    {
+        if (inputContext.started && bIsActive)
+        {
+            _weaponsManager.SetCurrentWeapon(_weaponsManager.Inventory[1]);
+        }
+    }
+    public void ChoooseW3(InputAction.CallbackContext inputContext)
+    {
+        if (inputContext.started && bIsActive)
+        {
+            _weaponsManager.SetCurrentWeapon(_weaponsManager.Inventory[2]);
+        }
+    }
+    public void ChoooseW4(InputAction.CallbackContext inputContext)
+    {
+        if (inputContext.started && bIsActive)
+        {
+            _weaponsManager.SetCurrentWeapon(_weaponsManager.Inventory[3]);
+        }
     }
 }

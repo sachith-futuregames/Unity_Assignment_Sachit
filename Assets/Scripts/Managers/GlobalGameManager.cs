@@ -109,7 +109,7 @@ public class GlobalGameManager : MonoBehaviour
         {
             for(int j = 0; j < CurrentLevelData.PlayerCount; ++j)
             {
-                GameObject Player = Instantiate(CharacterPrefab, new Vector3(i * 10, 50, j * 10), Quaternion.identity);
+                GameObject Player = Instantiate(CharacterPrefab, new Vector3(Random.Range(100f, 900f), 100f, Random.Range(100f, 900f)), Quaternion.identity);
                 Player.transform.SetParent(PlayerLayer.transform);
                 Player.GetComponent<Player_Controller>().SetPlayerMesh(TeamMeshes[i]);
                 Player.GetComponent<Player_Controller>().TeamID = i;

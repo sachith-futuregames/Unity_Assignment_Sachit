@@ -89,6 +89,42 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Weapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""aae881d5-a026-43ec-88cd-d1921769279f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""df0e815c-6088-410a-9ba7-75563c7045ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon3"",
+                    ""type"": ""Button"",
+                    ""id"": ""b48804b1-3f67-47da-aaa8-979968f0d143"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon4"",
+                    ""type"": ""Button"",
+                    ""id"": ""d528704d-103b-463f-b09d-18bbd699c932"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +292,50 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
                     ""action"": ""MoveAirCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9ba3b66-5bd1-48bf-afa1-b860f9d6f60e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8abec675-60cc-47d4-8b75-1fff03940ffe"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef469d8-71de-4dfb-905e-236910556e6f"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""feed6414-b38e-46c4-a87a-c2efb4f111e2"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +351,10 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
         m_Player_G_MoveTPPCam = m_Player_G.FindAction("MoveTPPCam", throwIfNotFound: true);
         m_Player_G_Zoom = m_Player_G.FindAction("Zoom", throwIfNotFound: true);
         m_Player_G_MoveAirCam = m_Player_G.FindAction("MoveAirCam", throwIfNotFound: true);
+        m_Player_G_Weapon1 = m_Player_G.FindAction("Weapon1", throwIfNotFound: true);
+        m_Player_G_Weapon2 = m_Player_G.FindAction("Weapon2", throwIfNotFound: true);
+        m_Player_G_Weapon3 = m_Player_G.FindAction("Weapon3", throwIfNotFound: true);
+        m_Player_G_Weapon4 = m_Player_G.FindAction("Weapon4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +421,10 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_G_MoveTPPCam;
     private readonly InputAction m_Player_G_Zoom;
     private readonly InputAction m_Player_G_MoveAirCam;
+    private readonly InputAction m_Player_G_Weapon1;
+    private readonly InputAction m_Player_G_Weapon2;
+    private readonly InputAction m_Player_G_Weapon3;
+    private readonly InputAction m_Player_G_Weapon4;
     public struct Player_GActions
     {
         private @Player_Input_G m_Wrapper;
@@ -348,6 +436,10 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
         public InputAction @MoveTPPCam => m_Wrapper.m_Player_G_MoveTPPCam;
         public InputAction @Zoom => m_Wrapper.m_Player_G_Zoom;
         public InputAction @MoveAirCam => m_Wrapper.m_Player_G_MoveAirCam;
+        public InputAction @Weapon1 => m_Wrapper.m_Player_G_Weapon1;
+        public InputAction @Weapon2 => m_Wrapper.m_Player_G_Weapon2;
+        public InputAction @Weapon3 => m_Wrapper.m_Player_G_Weapon3;
+        public InputAction @Weapon4 => m_Wrapper.m_Player_G_Weapon4;
         public InputActionMap Get() { return m_Wrapper.m_Player_G; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +470,18 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
                 @MoveAirCam.started -= m_Wrapper.m_Player_GActionsCallbackInterface.OnMoveAirCam;
                 @MoveAirCam.performed -= m_Wrapper.m_Player_GActionsCallbackInterface.OnMoveAirCam;
                 @MoveAirCam.canceled -= m_Wrapper.m_Player_GActionsCallbackInterface.OnMoveAirCam;
+                @Weapon1.started -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon1;
+                @Weapon1.performed -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon1;
+                @Weapon1.canceled -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon1;
+                @Weapon2.started -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon2;
+                @Weapon2.performed -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon2;
+                @Weapon2.canceled -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon2;
+                @Weapon3.started -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon3;
+                @Weapon3.performed -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon3;
+                @Weapon3.canceled -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon3;
+                @Weapon4.started -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon4;
+                @Weapon4.performed -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon4;
+                @Weapon4.canceled -= m_Wrapper.m_Player_GActionsCallbackInterface.OnWeapon4;
             }
             m_Wrapper.m_Player_GActionsCallbackInterface = instance;
             if (instance != null)
@@ -403,6 +507,18 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
                 @MoveAirCam.started += instance.OnMoveAirCam;
                 @MoveAirCam.performed += instance.OnMoveAirCam;
                 @MoveAirCam.canceled += instance.OnMoveAirCam;
+                @Weapon1.started += instance.OnWeapon1;
+                @Weapon1.performed += instance.OnWeapon1;
+                @Weapon1.canceled += instance.OnWeapon1;
+                @Weapon2.started += instance.OnWeapon2;
+                @Weapon2.performed += instance.OnWeapon2;
+                @Weapon2.canceled += instance.OnWeapon2;
+                @Weapon3.started += instance.OnWeapon3;
+                @Weapon3.performed += instance.OnWeapon3;
+                @Weapon3.canceled += instance.OnWeapon3;
+                @Weapon4.started += instance.OnWeapon4;
+                @Weapon4.performed += instance.OnWeapon4;
+                @Weapon4.canceled += instance.OnWeapon4;
             }
         }
     }
@@ -416,5 +532,9 @@ public partial class @Player_Input_G : IInputActionCollection2, IDisposable
         void OnMoveTPPCam(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnMoveAirCam(InputAction.CallbackContext context);
+        void OnWeapon1(InputAction.CallbackContext context);
+        void OnWeapon2(InputAction.CallbackContext context);
+        void OnWeapon3(InputAction.CallbackContext context);
+        void OnWeapon4(InputAction.CallbackContext context);
     }
 }

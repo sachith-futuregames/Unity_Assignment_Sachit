@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class WeaponsManager : MonoBehaviour
 {
     //States
-    [SerializeField] private WeaponsData _currentWeapon;// Remove Serialise Field Before Final
+    public WeaponsData[] Inventory;
+    private WeaponsData _currentWeapon;
     [SerializeField] private MeshFilter _launcherMesh;
     [SerializeField] private BoxCollider _meleeTrigger;
     [SerializeField] private Player_Controller _pc;
@@ -19,6 +20,11 @@ public class WeaponsManager : MonoBehaviour
     public delegate void AttackComplete();
     public AttackComplete OnAttackComplete;
 
+    private void Awake()
+    {
+        SetCurrentWeapon(Inventory[0]);
+    }
+
     public void Update()
     {
         ShowRayParticle();
@@ -28,6 +34,7 @@ public class WeaponsManager : MonoBehaviour
     public void SetCurrentWeapon(WeaponsData InNewWeapon)
     {
         _currentWeapon = InNewWeapon;
+        _weaponParticle = _currentWeapon.ParticleToEmit;
         SetLauncherMesh();
     }
 
@@ -171,4 +178,5 @@ public class WeaponsManager : MonoBehaviour
         OnAttackComplete();
     }
 
+    
 }

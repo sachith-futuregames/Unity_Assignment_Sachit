@@ -353,7 +353,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24e0406aeacf0041b67154f3467c595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentWeapon: {fileID: 11400000, guid: 2cc1c44b07e4b8d41a3f01d2b80ee48b, type: 2}
+  Inventory:
+  - {fileID: 11400000, guid: 00a311d3302e3804ca7555169826ceee, type: 2}
+  - {fileID: 11400000, guid: 2cc1c44b07e4b8d41a3f01d2b80ee48b, type: 2}
+  - {fileID: 11400000, guid: 489f9397421145d40b835733ede5cb0f, type: 2}
+  - {fileID: 11400000, guid: 641abaa85cb85d44d8c6e89c0cca0ea8, type: 2}
   _launcherMesh: {fileID: 3701858494602398788}
   _meleeTrigger: {fileID: 5762835072358271541}
   _pc: {fileID: 4111154716563241440}
